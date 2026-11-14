@@ -1,7 +1,7 @@
+import DeleteBookDialog from "@/components/books/DeleteBookDialog";
 import EditBookDialog from "@/components/books/EditBookDialog";
 import { auth } from "@/lib/auth";
 import { BookType } from "@/lib/Types/BookType";
-import { Trash2 } from "lucide-react";
 import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
@@ -86,12 +86,7 @@ const MyBooksPage = async () => {
                 <td className="px-6 py-4">
                   <div className="flex gap-2">
                     <EditBookDialog book={book} />
-                    <button
-                      // onClick={() => setDeleting(book)}
-                      className="inline-flex h-9 items-center gap-1.5 rounded-full border-[1.5px] border-error px-4 text-sm font-bold text-error transition-colors hover:bg-error/10"
-                    >
-                      <Trash2 className="size-3.5" aria-hidden /> Delete
-                    </button>
+                    <DeleteBookDialog book={book} />
                   </div>
                 </td>
               </tr>
@@ -116,7 +111,7 @@ const MyBooksPage = async () => {
               />
               <div className="min-w-0">
                 <Link
-                  href={`/books/${book._id}`}
+                  href={`/all-books/${book._id}`}
                   className="line-clamp-2 font-heading text-lg leading-snug font-bold text-ink hover:text-forest"
                 >
                   {book.title}
@@ -132,14 +127,9 @@ const MyBooksPage = async () => {
               </div>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex gap-3 ml-auto">
               <EditBookDialog book={book} />
-              <button
-                // onClick={() => setDeleting(book)}
-                className="inline-flex h-11 flex-1 items-center justify-center gap-1.5 rounded-full border-[1.5px] border-error text-sm font-bold text-error transition-colors hover:bg-error/10"
-              >
-                <Trash2 className="size-4" aria-hidden /> Delete
-              </button>
+              <DeleteBookDialog book={book} />
             </div>
           </li>
         ))}
