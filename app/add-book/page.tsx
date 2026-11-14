@@ -8,7 +8,29 @@ import { Button } from "@/components/ui/button";
 import { cn } from "cn";
 import { useSession } from "@/lib/auth-client";
 
-const CATEGORIES = ["Fiction", "Science", "History", "Kids", "Others"] as const;
+const CATEGORIES = [
+  "Action",
+  "Adventure",
+  "Biography",
+  "Classics",
+  "Crime",
+  "Fantasy",
+  "Graphic Novels",
+  "History",
+  "Historical Fiction",
+  "Horror",
+  "Literary Fiction",
+  "Memoir",
+  "Mystery",
+  "Poetry",
+  "Philosophy",
+  "Romance",
+  "Self-Help",
+  "Science Fiction",
+  "Thriller",
+  "True Crime",
+  "Young Adult",
+] as const;
 
 const INITIAL_STATE = {
   title: "",

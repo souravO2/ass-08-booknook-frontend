@@ -2,7 +2,9 @@ import BookCard from "@/components/books/BookCard";
 import { BookType } from "@/lib/Types/BookType";
 
 const allbooks = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/all-books`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/all-books`,{
+    cache:"no-store"
+  });
   return res.json();
 };
 
@@ -11,7 +13,7 @@ const AllBooksPage = async () => {
   console.log(books);
   return (
     <div className="max-w-7xl mx-auto">
-      <div>
+      <div className="m-2">
         <h1 className="font-heading text-4xl font-bold text-ink md:text-5xl">
           All Books
         </h1>

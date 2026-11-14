@@ -1,13 +1,15 @@
 import { BookType } from "@/lib/Types/BookType";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function BookCard({ book }: { book: BookType }) {
   return (
     <div className="flex h-full flex-col gap-2 rounded-2xl border border-border bg-white p-3.5">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src={book.bookImage}
         alt={book.title}
+        width={300}
+        height={400}
         className="h-100 w-full rounded-[10px] bg-sand object-cover"
       />
       <h3 className="mt-1.5 line-clamp-2 min-h-12 font-heading text-xl leading-snug font-bold text-ink">
@@ -18,7 +20,7 @@ export default function BookCard({ book }: { book: BookType }) {
         {book.category}
       </span>
       <Link
-        href={`/books/${book._id}`}
+        href={`/all-books/${book._id}`}
         className="mt-auto block rounded-full bg-forest py-3 text-center font-bold text-white transition-colors hover:bg-forest-deep"
       >
         View Details
