@@ -3,11 +3,11 @@ export interface BookType {
   title: string;
   author: string;
   category: string;
-  totalCopies: string;
+  totalCopies: number;
   bookImage: string;
   description: string;
   createdAt: string;
   userName: string;
   userEmail: string;
-  availableCopies: string;
+  availableCopies: number;
 }

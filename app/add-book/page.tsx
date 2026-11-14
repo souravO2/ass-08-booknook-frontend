@@ -36,7 +36,7 @@ const INITIAL_STATE = {
   title: "",
   author: "",
   category: "",
-  totalCopies: "1",
+  totalCopies: 1,
   bookImage: "",
   description: "",
 };
@@ -65,6 +65,7 @@ export default function AddBookPage() {
         },
         body: JSON.stringify({
           ...form,
+          totalCopies: Number(form.totalCopies),
           userName: session?.user.name,
           userEmail: session?.user.email,
         }),
