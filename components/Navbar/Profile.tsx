@@ -42,7 +42,11 @@ export function UserAvatar({
 
   return (
     <Avatar className={className}>
-      <AvatarImage src={user.image ?? undefined} alt={user.name} />
+      <AvatarImage
+        src={user.image ?? undefined}
+        alt={user.name}
+        referrerPolicy="no-referrer"
+      />
       <AvatarFallback className="bg-amber font-bold text-white">
         {initials}
       </AvatarFallback>

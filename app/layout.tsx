@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import { Toaster } from "sonner";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
+import Footer from "@/components/homepage/Footer";
 
 const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <Navbar />
         {children}
+        <Footer />
         <Toaster
           position="bottom-right"
           toastOptions={{

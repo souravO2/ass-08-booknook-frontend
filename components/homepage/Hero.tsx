@@ -96,12 +96,12 @@ export default function HeroSlider() {
                     <div
                       key={cover}
                       className={`relative overflow-hidden rounded-md shadow-xl transition-transform duration-300 hover:-translate-y-2
-                      h-32 w-19 sm:h-40 sm:w-24 md:w-32
+                      h-36 w-24 sm:h-44 sm:w-28 md:w-40
                       ${
                         index === 0
                           ? "-rotate-6"
                           : index === 1
-                            ? "-mt-5 h-36 rotate-0 sm:h-44 md:-mt-8 md:h-60"
+                            ? "-mt-5 h-40 w-26 rotate-0 sm:h-48 md:-mt-8 md:h-68 md:w-44"
                             : "rotate-6"
                       }`}
                     >
