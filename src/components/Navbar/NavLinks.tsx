@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSession } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 
 const publicLinks = [
   { id: 1, name: "Home", href: "/" },
@@ -19,7 +19,7 @@ type Props = { className?: string; onNavigate?: () => void };
 
 const NavLinks = ({ className = "", onNavigate }: Props) => {
   const pathname = usePathname();
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
 
   const links = session?.user ? [...publicLinks, ...privateLinks] : publicLinks;
 
