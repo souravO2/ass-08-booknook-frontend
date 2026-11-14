@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function BookCard({ book }: { book: BookType }) {
   return (
-    <div className="flex h-full flex-col gap-2 rounded-2xl border border-border bg-white p-3.5">
+    <div className="flex h-full flex-col gap-2 rounded-2xl border border-border bg-white p-2">
       <Image
         src={book.bookImage}
         alt={book.title}

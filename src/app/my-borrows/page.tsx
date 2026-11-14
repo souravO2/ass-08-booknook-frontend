@@ -95,7 +95,7 @@ const MyBorrowsPage = () => {
   }
 
   return (
-    <main className="mx-auto max-w-7xl px-4 pt-14 pb-24 md:px-8">
+    <main className="mx-auto max-w-7xl px-4 pt-8 pb-24 md:px-8">
       <div className="mb-8">
         <h1 className="font-heading text-4xl font-bold text-ink md:text-5xl">
           My Borrows

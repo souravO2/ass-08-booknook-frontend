@@ -12,7 +12,7 @@ const AllBooksPage = async () => {
   const books: BookType[] = await allbooks();
   console.log(books);
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto pt-8 px-4 md:px-8">
       <div className="m-2">
         <h1 className="font-heading text-4xl font-bold text-ink md:text-5xl">
           All Books
@@ -21,7 +21,7 @@ const AllBooksPage = async () => {
           Every title on the shelf, ready to borrow.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-1">
         {books.map((book) => (
           <BookCard key={book._id} book={book} />
         ))}

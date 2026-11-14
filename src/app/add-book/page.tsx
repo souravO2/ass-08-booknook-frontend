@@ -90,7 +90,7 @@ export default function AddBookPage() {
   const handleCancel = () => setForm(INITIAL_STATE);
 
   return (
-    <main className="flex-1 px-4 py-12 sm:px-6 lg:px-8">
+    <main className="flex-1 px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto text-center max-w-7xl">
         <h1 className="font-heading text-3xl font-bold text-ink sm:text-4xl">
           Add a Book
@@ -99,7 +99,7 @@ export default function AddBookPage() {
           Put a book on the shelf for other readers to borrow.
         </p>
       </div>
-      <div className="mx-auto mt-10 max-w-2xl">
+      <div className="mx-auto mt-6 max-w-2xl">
         <form
           onSubmit={handleSubmit}
           className="rounded-2xl border border-border bg-white p-6 sm:p-8"
