@@ -16,18 +16,21 @@ const slides = [
     title: "Add a book. Borrow a book. Return a book.",
     text: "Browse a shelf built by readers like you, take a title home for a few days and pass it on when you are done.",
     covers: ["/book1.jpg", "/book2.jpg", "/book3.jpg"],
+    background: "#1f4d3f",
   },
   {
     eyebrow: "BORROW FOR A FEW DAYS",
     title: "Take a great read home.",
     text: "Pick any available title, confirm in one step and keep it until the return date.",
     covers: ["/book4.jpg", "/book5.jpg", "/book6.jpg"],
+    background: "#8B4A2F",
   },
   {
     eyebrow: "SHARE YOUR SHELF",
     title: "Lend the books you love.",
     text: "Add your own books with a cover and the number of copies, and let other readers borrow them.",
     covers: ["/book7.jpg", "/book8.jpg", "/book9.jpg"],
+    background: "#304D70",
   },
 ];
 
@@ -57,7 +60,7 @@ export default function HeroSlider() {
   }, [api]);
 
   return (
-    <section className="relative mx-3 my-4 max-w-7xl overflow-hidden rounded-2xl bg-forest sm:mx-4 sm:rounded-[28px] md:mx-auto">
+    <section className="relative mx-3 my-4 max-w-7xl overflow-hidden rounded-2xl sm:mx-4 sm:rounded-[28px] md:mx-auto">
       <Carousel
         setApi={setApi}
         opts={{ loop: true }}
@@ -65,8 +68,12 @@ export default function HeroSlider() {
       >
         <CarouselContent className="ml-0">
           {slides.map((s) => (
-            <CarouselItem key={s.title} className="pl-0">
-              <div className="flex flex-col-reverse items-center gap-7 px-5 pt-7 pb-16 sm:gap-10 sm:px-8 sm:pt-10 sm:pb-20 md:flex-row md:gap-12 md:p-16 md:pb-24">
+            <CarouselItem
+              key={s.title}
+              className="pl-0"
+              style={{ backgroundColor: s.background }}
+            >
+              <div className="flex flex-col-reverse items-center gap-7 px-5 pt-7 pb-16 text-paper sm:gap-10 sm:px-8 sm:pt-10 sm:pb-20 md:flex-row md:gap-12 md:p-16 md:pb-24">
                 {/* Text Content */}
                 <div className="w-full flex-1 text-center md:text-left">
                   <p className="text-[10px] font-bold tracking-[0.13em] text-gold sm:text-xs">
@@ -88,9 +95,7 @@ export default function HeroSlider() {
                     Browse Books
                   </Link>
                 </div>
-
                 {/* Book Covers */}
-
                 <div className="flex w-full flex-1 items-center justify-center gap-3 py-2 sm:gap-4 md:p-4">
                   {s.covers.map((cover, index) => (
                     <div
@@ -120,7 +125,6 @@ export default function HeroSlider() {
           ))}
         </CarouselContent>
       </Carousel>
-
       {/* Dots */}
       <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 md:bottom-10">
         {slides.map((_, i) => (
