@@ -1,3 +1,4 @@
+import BorrowButton from "@/components/books/BorrowButton";
 import { BookType } from "@/lib/Types/BookType";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +9,6 @@ const BookDetailPage = async ({
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
-  console.log(id);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/all-books/${id}`,
     {
@@ -18,7 +18,6 @@ const BookDetailPage = async ({
   // if (!res.ok) notFound();
   const book: BookType = await res.json();
   // if (!destination) notFound();
-  console.log(book);
 
   const addedOn = new Date(book.createdAt).toLocaleDateString("en-GB", {
     day: "2-digit",
@@ -89,6 +88,7 @@ const BookDetailPage = async ({
           </dl>
 
           <div className="mt-1.5 flex flex-wrap gap-3">
+            <BorrowButton book={book} />
             <Link
               href="/all-books"
               className="inline-flex h-12 items-center rounded-full border-[1.5px] border-forest px-6 font-bold text-forest transition-colors hover:bg-sand"

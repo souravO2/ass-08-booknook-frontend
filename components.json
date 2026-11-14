@@ -4,11 +4,7 @@
   "rsc": true,
   "tsx": true,
   "tailwind": {
-    "config": "",
-    "css": "app/globals.css",
-    "baseColor": "neutral",
-    "cssVariables": true,
-    "prefix": ""
+    "css": "src/app/globals.css"
   },
   "iconLibrary": "lucide",
   "rtl": false,

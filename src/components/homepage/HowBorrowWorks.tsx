@@ -18,7 +18,7 @@ const steps = [
 
 const HowBorrowWorks = () => {
   return (
-    <section className="mx-auto max-w-295 my-4 px-4 pt-12 md:px-8 md:pt-24">
+    <section className="mx-auto max-w-295 my-2 px-4 py-4 md:px-8">
       <div className="rounded-[28px] bg-sand p-8 md:p-14">
         <h2 className="font-heading text-3xl leading-tight font-bold text-ink md:text-[40px]">
           How Borrowing Works

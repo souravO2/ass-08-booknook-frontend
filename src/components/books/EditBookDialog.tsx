@@ -90,7 +90,7 @@ const EditBookDialog = ({ book }: { book: BookType }) => {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="inline-flex h-9 items-center gap-1.5 rounded-full border-[1.5px] border-forest px-4 text-sm font-bold text-forest transition-colors hover:bg-sand"
+        className="inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full border-[1.5px] border-forest px-4 text-sm font-bold text-forest transition-colors hover:bg-sand"
       >
         <Pencil className="size-3.5" aria-hidden />
         Edit
@@ -200,7 +200,7 @@ const EditBookDialog = ({ book }: { book: BookType }) => {
                   type="button"
                   onClick={() => setIsOpen(false)}
                   disabled={submitting}
-                  className="inline-flex h-11 items-center gap-2 rounded-full border border-border px-5 font-bold text-ink hover:bg-sand"
+                  className="inline-flex h-11 cursor-pointer items-center gap-2 rounded-full border border-border px-5 font-bold text-ink hover:bg-sand"
                 >
                   Cancel
                 </button>
@@ -208,7 +208,7 @@ const EditBookDialog = ({ book }: { book: BookType }) => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex h-11 items-center gap-2 rounded-full bg-forest px-5 font-bold text-white hover:bg-forest-deep disabled:opacity-60"
+                  className="inline-flex h-11 cursor-pointer items-center gap-2 rounded-full bg-forest px-5 font-bold text-white hover:bg-forest-deep disabled:opacity-60"
                 >
                   {submitting ? (
                     <Loader2 className="size-4 animate-spin" />

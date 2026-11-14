@@ -122,7 +122,7 @@ export default function HeroSlider() {
       </Carousel>
 
       {/* Dots */}
-      <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 md:bottom-10 md:left-16 md:translate-x-0">
+      <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 md:bottom-10">
         {slides.map((_, i) => (
           <button
             key={i}

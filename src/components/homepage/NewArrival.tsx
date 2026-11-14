@@ -22,7 +22,7 @@ const NewArrival = async () => {
   const books = await getNewBooks();
 
   return (
-    <section className="mx-auto max-w-7xl px-4 pt-16 md:px-8 md:pt-20">
+    <section className="mx-auto max-w-7xl px-4 py-16 md:px-8">
       <div className="mb-8">
         <p className="text-[13px] font-bold tracking-[0.14em] text-amber">
           JUST ON THE SHELF

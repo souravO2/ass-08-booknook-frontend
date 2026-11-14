@@ -15,6 +15,7 @@ import { useSession } from "@/lib/auth-client";
 import NavLinks from "./NavLinks";
 import LogInButtons from "./LogInButtons";
 import { UserAvatar, useLogout } from "./Profile";
+import Image from "next/image";
 
 export default function MobileMenu() {
   const [open, setOpen] = React.useState(false);
@@ -35,11 +36,20 @@ export default function MobileMenu() {
         <SheetContent
           side="right"
           showCloseButton={false}
-          className="w-72 bg-paper p-6"
+          className="w-72 bg-paper p-4"
         >
           <SheetHeader className="flex-row items-center justify-between p-0">
-            <SheetTitle className="font-heading text-2xl text-forest">
-              BookNook
+            <SheetTitle className="flex items-center gap-2">
+              <Image
+                src="/logo.png"
+                width={40}
+                height={40}
+                className="rounded-lg"
+                alt="BookNook logo"
+              />
+              <span className="font-heading text-2xl font-bold text-forest">
+                BookNook
+              </span>
             </SheetTitle>
             <SheetClose
               aria-label="Close menu"
