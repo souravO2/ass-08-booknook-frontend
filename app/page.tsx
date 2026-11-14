@@ -1,3 +1,9 @@
+import HeroSlider from "@/components/homepage/Hero";
+
 export default function Page() {
-  return <div></div>;
+  return (
+    <div>
+      <HeroSlider />
+    </div>
+  );
 }
