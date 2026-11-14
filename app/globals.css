@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme {
+  /* Surfaces */
+  --color-paper: #f6f1e7; /* page background */
+  --color-white: #ffffff; /* cards, inputs */
+  --color-sand: #eadfc8; /* tags, table headers, "How Borrowing Works" section */
+  --color-border: #dcd2be; /* card and table borders */
+
+  /* Text */
+  --color-ink: #1e2b26; /* main text */
+  --color-muted: #55625c; /* secondary text */
+
+  /* Brand */
+  --color-forest: #1f4d3f; /* primary buttons, logo, hero, Login panel */
+  --color-forest-deep: #16382e; /* button hover, footer */
+  --color-amber: #a8531a; /* accent, active nav link */
+  --color-gold: #e9c46a; /* hero button, highlights */
+
+  /* Feedback */
+  --color-error: #9b2c2c; /* Delete button, error states */
+
+  /* Fonts */
+  --font-heading: "Fraunces", serif;
+  --font-body: "DM Sans", sans-serif;
+}
+
+body {
+  @apply bg-paper text-ink font-body;
+}
