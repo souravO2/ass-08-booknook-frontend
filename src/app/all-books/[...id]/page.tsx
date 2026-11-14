@@ -2,6 +2,7 @@ import BorrowButton from "@/components/books/BorrowButton";
 import { BookType } from "@/lib/Types/BookType";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 const BookDetailPage = async ({
   params,
@@ -15,9 +16,8 @@ const BookDetailPage = async ({
       cache: "no-store",
     },
   );
-  // if (!res.ok) notFound();
+  if (!res.ok) notFound();
   const book: BookType = await res.json();
-  // if (!destination) notFound();
 
   const addedOn = new Date(book.createdAt).toLocaleDateString("en-GB", {
     day: "2-digit",
