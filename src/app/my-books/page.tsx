@@ -1,6 +1,7 @@
 import DeleteBookDialog from "@/components/books/DeleteBookDialog";
 import EditBookDialog from "@/components/books/EditBookDialog";
 import { auth } from "@/lib/auth";
+import { tokenFromServer } from "@/lib/tokenServer";
 import { BookType } from "@/lib/Types/BookType";
 import { headers } from "next/headers";
 import Image from "next/image";
@@ -24,10 +25,16 @@ const MyBooksPage = async () => {
   let failed = false;
 
   if (email) {
+    const token = await tokenFromServer();
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/my-books/${email}`,
-        { cache: "no-store" },
+        {
+          cache: "no-store",
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        },
       );
 
       if (!res.ok) throw new Error("Failed to fetch books");

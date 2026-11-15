@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Loader2 } from "lucide-react";
 import { useSession } from "@/lib/auth-client";
 import ReturnDialog from "@/components/books/ReturnDialog";
+import { tokenFromClient } from "@/lib/tokenClient";
 
 type Borrow = {
   _id: string;
@@ -46,15 +47,30 @@ const MyBorrowsPage = () => {
   React.useEffect(() => {
     if (!email) return;
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-borrows/${email}`, {
-      cache: "no-store",
-    })
-      .then((res) => {
+    const fetchBorrows = async () => {
+      try {
+        const token = await tokenFromClient();
+
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/my-borrows/${email}`,
+          {
+            cache: "no-store",
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
         if (!res.ok) throw new Error();
-        return res.json();
-      })
-      .then(setBorrows)
-      .catch(() => setFailed(true));
+
+        const data: Borrow[] = await res.json();
+        setBorrows(data);
+      } catch {
+        setFailed(true);
+      }
+    };
+
+    fetchBorrows();
   }, [email]);
 
   if (isPending || (email && borrows === null && !failed)) {

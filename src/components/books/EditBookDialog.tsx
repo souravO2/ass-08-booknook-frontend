@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Pencil, Loader2, Save, X } from "lucide-react";
 import { toast } from "sonner";
 import { BookType } from "@/lib/Types/BookType";
+import { tokenFromClient } from "@/lib/tokenClient";
 
 const CATEGORIES = [
   "Action",
@@ -51,7 +52,7 @@ const EditBookDialog = ({ book }: { book: BookType }) => {
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-
+    const token = await tokenFromClient();
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/my-books/${book._id}`,
@@ -59,6 +60,7 @@ const EditBookDialog = ({ book }: { book: BookType }) => {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(form),
         },

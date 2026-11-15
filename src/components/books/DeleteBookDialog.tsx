@@ -14,6 +14,7 @@ import { BookType } from "@/lib/Types/BookType";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { tokenFromClient } from "@/lib/tokenClient";
 
 export default function DeleteBookDialog({ book }: { book: BookType }) {
   const router = useRouter();
@@ -22,12 +23,15 @@ export default function DeleteBookDialog({ book }: { book: BookType }) {
 
   const handleDelete = async (id: string) => {
     setIsDeleting(true);
-
+    const token = await tokenFromClient();
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/my-books/${id}`,
         {
           method: "DELETE",
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
         },
       );
       if (!res.ok) {

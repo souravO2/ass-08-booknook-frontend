@@ -1,4 +1,5 @@
 import BorrowButton from "@/components/books/BorrowButton";
+import { tokenFromServer } from "@/lib/tokenServer";
 import { BookType } from "@/lib/Types/BookType";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,10 +11,14 @@ const BookDetailPage = async ({
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
+  const token = await tokenFromServer();
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/all-books/${id}`,
     {
       cache: "no-store",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
   if (!res.ok) notFound();

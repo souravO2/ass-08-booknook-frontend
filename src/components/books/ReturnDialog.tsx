@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2, Undo2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { tokenFromClient } from "@/lib/tokenClient";
 
 type ReturnDialogProps = {
   borrowId: string;
@@ -29,12 +30,15 @@ export default function ReturnDialog({
 
   const handleReturn = async () => {
     setIsReturning(true);
-
+    const token = await tokenFromClient();
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/my-borrows/${borrowId}`,
         {
           method: "DELETE",
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
         },
       );
 

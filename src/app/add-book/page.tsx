@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { cn } from "cn";
 import { useSession } from "@/lib/auth-client";
+import { tokenFromClient } from "@/lib/tokenClient";
 
 const CATEGORIES = [
   "Action",
@@ -59,11 +60,14 @@ export default function AddBookPage() {
     e.preventDefault();
     setSubmitting(true);
 
+    const token = await tokenFromClient();
+
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/add-book`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           ...form,
@@ -77,6 +81,7 @@ export default function AddBookPage() {
 
       if (!res.ok) {
         toast.error(result.message || "Couldn't add the book");
+        return;
       }
 
       console.log(result);

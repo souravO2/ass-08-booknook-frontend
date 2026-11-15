@@ -14,6 +14,7 @@ import {
 import { useSession } from "@/lib/auth-client";
 import Image from "next/image";
 import { BookType } from "@/lib/Types/BookType";
+import { tokenFromClient } from "@/lib/tokenClient";
 
 const LOAN_DAYS = 7; // keep this the same as the server
 
@@ -40,6 +41,7 @@ export default function BorrowButton({ book }: { book: BookType }) {
 
   const handleConfirm = async () => {
     setSubmitting(true);
+    const token = await tokenFromClient();
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/borrow-book`,
@@ -47,6 +49,7 @@ export default function BorrowButton({ book }: { book: BookType }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             bookId: book._id,
