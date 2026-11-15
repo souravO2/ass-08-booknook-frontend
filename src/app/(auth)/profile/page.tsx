@@ -6,6 +6,7 @@ import { BookOpen, Library, Loader2, LogOut, Pencil, Plus } from "lucide-react";
 import { useSession } from "@/lib/auth-client";
 import { UserAvatar, useLogout } from "@/components/Navbar/Profile";
 import EditProfileDialog from "./EditProfileDialog";
+import { tokenFromClient } from "@/lib/tokenClient";
 
 export default function ProfileView() {
   const { data: session, isPending } = useSession();
@@ -20,19 +21,43 @@ export default function ProfileView() {
 
   React.useEffect(() => {
     if (!user?.email) return;
-    const base = process.env.NEXT_PUBLIC_API_URL;
-    const email = user.email;
 
-    const count = (path: string) =>
-      fetch(`${base}${path}`, { cache: "no-store" })
-        .then((r) => (r.ok ? r.json() : Promise.reject()))
-        .then((data: unknown[]) => data.length)
-        .catch(() => null);
+    const fetchCounts = async () => {
+      try {
+        const base = process.env.NEXT_PUBLIC_API_URL;
+        const email = user.email;
+        const token = await tokenFromClient();
 
-    Promise.all([
-      count(`/my-books/${email}`),
-      count(`/my-borrows/${email}`),
-    ]).then(([books, borrows]) => setCounts({ books, borrows }));
+        const count = async (path: string): Promise<number | null> => {
+          try {
+            const res = await fetch(`${base}${path}`, {
+              cache: "no-store",
+              headers: {
+                authorization: `Bearer ${token}`,
+              },
+            });
+
+            if (!res.ok) return null;
+
+            const data: unknown[] = await res.json();
+            return data.length;
+          } catch {
+            return null;
+          }
+        };
+
+        const [books, borrows] = await Promise.all([
+          count(`/my-books/${email}`),
+          count(`/my-borrows/${email}`),
+        ]);
+
+        setCounts({ books, borrows });
+      } catch {
+        setCounts({ books: null, borrows: null });
+      }
+    };
+
+    fetchCounts();
   }, [user?.email]);
 
   if (isPending) {
