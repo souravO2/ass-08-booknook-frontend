@@ -74,7 +74,7 @@ export default function ReturnDialog({
         }
       >
         <Undo2 className="size-3.5" aria-hidden />
-        Return
+        Return Book
       </DialogTrigger>
 
       <DialogContent className="max-w-md gap-4 rounded-[20px] border-border bg-white p-8">

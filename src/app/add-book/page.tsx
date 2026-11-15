@@ -21,6 +21,7 @@ const CATEGORIES = [
   "Horror",
   "Literary Fiction",
   "Memoir",
+  "Novel",
   "Mystery",
   "Poetry",
   "Philosophy",
@@ -30,6 +31,7 @@ const CATEGORIES = [
   "Thriller",
   "True Crime",
   "Young Adult",
+  "Others",
 ] as const;
 
 const INITIAL_STATE = {

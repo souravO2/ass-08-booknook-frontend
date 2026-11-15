@@ -39,7 +39,7 @@ const MyBooksPage = async () => {
   }
 
   return (
-    <main className="mx-auto max-w-7xl px-4 pt-8 pb-24 md:px-8">
+    <main className="mx-auto max-w-7xl min-h-[60vh] px-4 pt-8 pb-24 md:px-8">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="font-heading text-4xl font-bold text-ink md:text-5xl">
