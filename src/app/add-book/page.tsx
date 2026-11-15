@@ -76,7 +76,7 @@ export default function AddBookPage() {
       const result = await res.json();
 
       if (!res.ok) {
-        throw new Error(result.message || "Couldn't add the book");
+        toast.error(result.message || "Couldn't add the book");
       }
 
       console.log(result);

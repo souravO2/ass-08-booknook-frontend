@@ -14,7 +14,6 @@ import {
 import { useSession } from "@/lib/auth-client";
 import Image from "next/image";
 import { BookType } from "@/lib/Types/BookType";
-// import { tokenFromClient } from "@/lib/tokenClient";
 
 const LOAN_DAYS = 7; // keep this the same as the server
 
@@ -33,9 +32,7 @@ export default function BorrowButton({ book }: { book: BookType }) {
     if (isPending) return;
     if (!session?.user) {
       toast.error("Please log in to borrow this book");
-      router.push(
-        `/signin?redirect=${encodeURIComponent(`/all-books/${book._id}`)}`,
-      );
+      router.push(`/signin?redirect=${`/all-books/${book._id}`}`);
       return;
     }
     setOpen(true);

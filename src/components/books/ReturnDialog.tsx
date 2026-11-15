@@ -1,4 +1,3 @@
-
 "use client";
 
 import {
@@ -33,11 +32,10 @@ export default function ReturnDialog({
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/return-book/${borrowId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/my-borrows/${borrowId}`,
         {
           method: "DELETE",
-          signal: AbortSignal.timeout(10000),
-        }
+        },
       );
 
       if (!res.ok) {
@@ -52,7 +50,7 @@ export default function ReturnDialog({
       toast.error(
         error instanceof Error
           ? error.message
-          : "Something went wrong. Please try again."
+          : "Something went wrong. Please try again.",
       );
     } finally {
       setIsReturning(false);
@@ -60,10 +58,7 @@ export default function ReturnDialog({
   };
 
   return (
-    <Dialog
-      open={isReturnDialogOpen}
-      onOpenChange={setIsReturnDialogOpen}
-    >
+    <Dialog open={isReturnDialogOpen} onOpenChange={setIsReturnDialogOpen}>
       <DialogTrigger
         render={
           <Button
@@ -84,8 +79,8 @@ export default function ReturnDialog({
           </DialogTitle>
 
           <DialogDescription className="leading-relaxed text-muted">
-            Are you sure you want to return &quot;{bookTitle}&quot;? It will
-            be removed from your borrowed books and become available again.
+            Are you sure you want to return &quot;{bookTitle}&quot;? It will be
+            removed from your borrowed books and become available again.
           </DialogDescription>
         </DialogHeader>
 
@@ -106,9 +101,7 @@ export default function ReturnDialog({
             disabled={isReturning}
             className="h-12 flex-1 cursor-pointer gap-2 rounded-full bg-forest font-bold text-white transition-opacity hover:bg-forest-deep disabled:opacity-60"
           >
-            {isReturning && (
-              <Loader2 className="size-4 animate-spin" />
-            )}
+            {isReturning && <Loader2 className="size-4 animate-spin" />}
             {isReturning ? "Returning..." : "Confirm Return"}
           </Button>
         </div>

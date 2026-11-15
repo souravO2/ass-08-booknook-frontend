@@ -89,7 +89,7 @@ export default function HeroSlider() {
                   </p>
 
                   <Link
-                    href="/books"
+                    href="/all-books"
                     className="inline-block rounded-full bg-gold px-6 py-2.5 text-sm font-bold text-ink transition hover:brightness-95 sm:py-3 sm:text-base"
                   >
                     Browse Books

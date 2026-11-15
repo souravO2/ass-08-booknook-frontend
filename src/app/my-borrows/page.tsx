@@ -4,9 +4,8 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Loader2 } from "lucide-react";
-import { toast } from "sonner";
 import { useSession } from "@/lib/auth-client";
-import ReturnDialog from "@/components/books/ReturnButton";
+import ReturnDialog from "@/components/books/ReturnDialog";
 
 type Borrow = {
   _id: string;
@@ -43,7 +42,6 @@ const MyBorrowsPage = () => {
 
   const [borrows, setBorrows] = React.useState<Borrow[] | null>(null);
   const [failed, setFailed] = React.useState(false);
-  const [returningId, setReturningId] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     if (!email) return;
@@ -58,33 +56,6 @@ const MyBorrowsPage = () => {
       .then(setBorrows)
       .catch(() => setFailed(true));
   }, [email]);
-
-  const handleReturn = async (id: string) => {
-    setReturningId(id);
-
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/return-book/${id}`,
-        {
-          method: "DELETE",
-          signal: AbortSignal.timeout(10000),
-        },
-      );
-
-      if (!res.ok) {
-        const { msg } = await res.json().catch(() => ({}));
-        toast.error(msg || "Could not return the book");
-        return;
-      }
-
-      setBorrows((prev) => prev?.filter((b) => b._id !== id) ?? prev);
-      toast.success("Book returned successfully");
-    } catch {
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setReturningId(null);
-    }
-  };
 
   if (isPending || (email && borrows === null && !failed)) {
     return (

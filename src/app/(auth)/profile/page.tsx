@@ -1,4 +1,3 @@
-// components/ProfileView.tsx
 "use client";
 
 import * as React from "react";
@@ -22,7 +21,7 @@ export default function ProfileView() {
   React.useEffect(() => {
     if (!user?.email) return;
     const base = process.env.NEXT_PUBLIC_API_URL;
-    const email = encodeURIComponent(user.email);
+    const email = user.email;
 
     const count = (path: string) =>
       fetch(`${base}${path}`, { cache: "no-store" })
