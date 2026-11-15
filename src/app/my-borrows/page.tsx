@@ -3,7 +3,6 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Loader2 } from "lucide-react";
 import { useSession } from "@/lib/auth-client";
 import ReturnDialog from "@/components/books/ReturnDialog";
 import { tokenFromClient } from "@/lib/tokenClient";
@@ -38,11 +37,12 @@ const dueColor = (d: string) =>
   new Date(d).getTime() < Date.now() ? "text-error" : "text-amber";
 
 const MyBorrowsPage = () => {
-  const { data: session, isPending } = useSession();
+  const { data: session } = useSession();
   const email = session?.user.email;
 
   const [borrows, setBorrows] = React.useState<Borrow[] | null>(null);
   const [failed, setFailed] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     if (!email) return;
@@ -67,19 +67,13 @@ const MyBorrowsPage = () => {
         setBorrows(data);
       } catch {
         setFailed(true);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchBorrows();
   }, [email]);
-
-  if (isPending || (email && borrows === null && !failed)) {
-    return (
-      <main className="mx-auto flex min-h-[50vh] max-w-7xl items-center justify-center px-4">
-        <Loader2 className="size-10 animate-spin text-forest" />
-      </main>
-    );
-  }
 
   return (
     <main className="mx-auto max-w-7xl min-h-[60vh] px-4 pt-8 pb-24 md:px-8">
@@ -92,15 +86,38 @@ const MyBorrowsPage = () => {
         </p>
       </div>
 
-      {!email || failed ? (
+      {!email ? (
         <div className="rounded-[20px] border border-border bg-white p-8 text-center text-muted">
-          {failed
-            ? "Failed to load your borrowed books. Please try again."
-            : "Please sign in to view your borrowed books."}
+          Please sign in to view your borrowed books.
+        </div>
+      ) : loading ? (
+        <div className="flex min-h-48 flex-col items-center justify-center gap-4 rounded-[20px] border border-border bg-white p-8">
+          <div className="h-9 w-9 animate-spin rounded-full border-4 border-sand border-t-forest" />
+
+          <p className="text-sm font-medium text-muted">
+            Loading your borrowed books...
+          </p>
+        </div>
+      ) : failed ? (
+        <div className="rounded-[20px] border border-border bg-white p-8 text-center text-muted">
+          Failed to load your borrowed books. Please try again.
         </div>
       ) : !borrows?.length ? (
-        <div className="rounded-[20px] border border-border bg-white p-8 text-center text-muted">
-          You haven&apos;t borrowed any books yet.
+        <div className="flex flex-col items-center justify-center rounded-[20px] border border-border bg-white px-6 py-12 text-center">
+          <p className="text-lg font-semibold text-ink">
+            You haven&apos;t borrowed any books yet.
+          </p>
+
+          <p className="mt-2 text-sm text-muted">
+            Explore our collection and find your next favorite book.
+          </p>
+
+          <Link
+            href="/all-books"
+            className="mt-6 rounded-xl bg-forest px-6 py-3 font-semibold text-white transition-colors hover:bg-forest/90"
+          >
+            Browse Books
+          </Link>
         </div>
       ) : (
         <>
