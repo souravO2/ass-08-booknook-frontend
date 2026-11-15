@@ -2,13 +2,16 @@ import { Fraunces } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import { Toaster } from "sonner";
-import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import Footer from "@/components/homepage/Footer";
+import { Metadata } from "next";
 
 const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "BookNook",
+  title: {
+    default: "BookNook",
+    template: "BookNook | %s",
+  },
   description: "A place to discover and share your favorite books.",
 };
 

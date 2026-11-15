@@ -1,16 +1,17 @@
 import BookCard from "@/components/books/BookCard";
 import { BookType } from "@/lib/Types/BookType";
 
+export const metadata = { title: "All Books" };
+
 const allbooks = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/all-books`,{
-    cache:"no-store"
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/all-books`, {
+    cache: "no-store",
   });
   return res.json();
 };
 
 const AllBooksPage = async () => {
   const books: BookType[] = await allbooks();
-  console.log(books);
   return (
     <div className="max-w-7xl mx-auto pt-8 px-4 md:px-8">
       <div className="m-2">

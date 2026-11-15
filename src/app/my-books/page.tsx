@@ -7,6 +7,8 @@ import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 
+export const metadata = { title: "My Books" };
+
 const formatDate = (d: string) =>
   new Date(d).toLocaleDateString("en-GB", {
     day: "2-digit",
