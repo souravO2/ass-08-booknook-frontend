@@ -4,7 +4,7 @@ import { mongodbAdapter } from "@better-auth/mongo-adapter";
 import { jwt } from "better-auth/plugins";
 
 const client = new MongoClient(process.env.MDB_URI as string);
-const db = client.db("user");
+const db = client.db("booknook");
 
 export const auth = betterAuth({
   emailAndPassword: {
